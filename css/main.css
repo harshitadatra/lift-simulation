@@ -14,14 +14,15 @@
     flex-direction: column;
     margin-top: 1rem;
 }
-.floor-container
+.floor
 {
     display: flex;
-    align-items: center;
+    
+    flex-direction: column;
     justify-content: space-between;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    height: 4rem;
+   
     border-bottom: 3px solid blueviolet;
 }
 .rectangle
