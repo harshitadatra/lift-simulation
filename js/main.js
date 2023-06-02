@@ -27,6 +27,7 @@ function clickHandler()
     }
 
     renderFloors(floorCount);
+    renderLifts(liftCount);
   
 
     
@@ -54,7 +55,7 @@ function renderFloors(totalFloors)
     groundFloor.className = "floor";
     groundFloor.id = `floor-0`;
     groundFloor.innerHTML = `
-            <section class="floor-details">
+            <section class="floor-details ">
                 <button class="lift-control up" >UP</button>
                 <p class="floor-number">Floor-0</p> 
             </section>
@@ -64,5 +65,21 @@ function renderFloors(totalFloors)
       .addEventListener("click", (event) => handleLiftCall(event));
     floorsContainer.appendChild(groundFloor);
 
+}
+
+function renderLifts(totalLifts)
+{
+  const groundFloor = document.querySelector("#floors-container>#floor-0");
+  for (let liftNumber = 1; liftNumber <= totalLifts; liftNumber++) {
+    const currentLift = document.createElement("section");
+    currentLift.className = "lift";
+    currentLift.id = `lift-${liftNumber}`;
+    currentLift.innerHTML = `
+            <section class="rectangle"></section>
+            
+        `;
+   
+    groundFloor.appendChild(currentLift);
+  }
 }
 
