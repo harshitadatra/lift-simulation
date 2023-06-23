@@ -3,6 +3,12 @@
  var submitButton = document.querySelector(".submit-button");
 
 
+let liftRequestQueue = [];
+
+//Check for any Lift Request in every 200msec.
+document.addEventListener("DOMContentLoaded", function () {
+  let id = setInterval(checkQueue, 200);
+});
 
 
 
@@ -32,6 +38,15 @@ function clickHandler()
 
     
 }
+addEventListener("click", (e) => {
+console.log("butotn")
+  if (
+    e.target.classList.contains("up") ||
+    e.target.classList.contains("down")
+  ) {
+    liftRequestQueue.push(e.target.dataset.floorno);
+  }
+});
 function renderFloors(totalFloors)
 {
     const floorsContainer = document.querySelector("#floors-container");
@@ -42,9 +57,9 @@ function renderFloors(totalFloors)
       presentFloor.id = floorId;
       presentFloor.innerHTML = `
                 <section class="floor-details">
-                    <button class="lift-control up">UP</button>
+                    <button class=" up" data-floorNo="${floorNumber}">UP</button>
                     <p class="floor-number">Floor-${floorNumber}</p> 
-                    <button class="lift-control down">DOWN</button>
+                    <button class=" down" data-floorNo="${floorNumber}">DOWN</button>
                 </section>
         `;
      
@@ -56,13 +71,11 @@ function renderFloors(totalFloors)
     groundFloor.id = `floor-0`;
     groundFloor.innerHTML = `
             <section class="floor-details ">
-                <button class="lift-control up" >UP</button>
+                <button class=" up"  data-floorNo="0">UP</button>
                 <p class="floor-number">Floor-0</p> 
             </section>
     `;
-    groundFloor
-      .querySelector(".up")
-      .addEventListener("click", (event) => handleLiftCall(event));
+   
     floorsContainer.appendChild(groundFloor);
 
 }
@@ -72,14 +85,88 @@ function renderLifts(totalLifts)
   const groundFloor = document.querySelector("#floors-container>#floor-0");
   for (let liftNumber = 1; liftNumber <= totalLifts; liftNumber++) {
     const currentLift = document.createElement("section");
-    currentLift.className = "lift";
-    currentLift.id = `lift-${liftNumber}`;
+    currentLift.className = "Lift";
+    currentLift.id = `Lift-${liftNumber}`;
     currentLift.innerHTML = `
-            <section class="rectangle"></section>
+            <section></section>
             
         `;
    
     groundFloor.appendChild(currentLift);
   }
+}
+
+// fucntion to move llift 
+
+function moveLift(targetFloor) {
+  const lifts = Array.from(document.getElementsByClassName("Lift"));
+  const availableLift = lifts.find((lift) => lift.dataset.status === "free");
+  const availableLiftOnTargetFloor = lifts.find((lift) => {
+    lift.dataset.status === "free" && Number(lift.dataset.pos) === targetFloor;
+  });
+
+  // The lift is already present on the current floor
+  if (availableLiftOnTargetFloor) {
+    availableLiftOnTargetFloor.setAttribute("data-status", "busy");
+    return;
+  }
+
+  //If lift is somewhere else than the targeted floor
+  let distanceToTravel = Math.abs(
+    targetFloor - Number(availableLift.dataset.pos)
+  );
+  availableLift.style.transition = `transform ${distanceToTravel * 2}s linear`;
+  availableLift.style.transform = `translateY(${-200 * targetFloor}px)`;
+  availableLift.setAttribute("data-status", "busy");
+
+  //Make the status of lift free after certain time
+  setTimeout(() => {
+    DoorAnimation(availableLift);
+  }, distanceToTravel * 2000);
+
+  setTimeout(() => {
+    availableLift.setAttribute("data-status", "free");
+    availableLift.setAttribute("data-pos", targetFloor);
+  }, distanceToTravel * 2000 + 5000);
+}
+
+// Check if any lift is free (TRUE: Any lift is free; else FALSE)
+function checkAvailability() {
+  const lifts = Array.from(document.getElementsByClassName("Lift"));
+  const availableLift = lifts.find((lift) => lift.dataset.status === "free");
+  if (availableLift) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+//Check for any requests in the queue and process it
+function checkQueue() {
+  console.log("checke sskjhfkdjf")
+  if (liftRequestQueue.length === 0) {
+    return;
+  } else {
+    let target = liftRequestQueue[0];
+    if (checkAvailability()) {
+      liftRequestQueue.shift();
+      moveLift(target);
+    } else {
+      return;
+    }
+  }
+}
+
+//Door Animation
+
+function DoorAnimation(availableLift) {
+  setTimeout(() => {
+    availableLift.children[0].classList.add("leftDoorAnimate");
+    availableLift.children[1].classList.add("rightDoorAnimate");
+  }, 500);
+  setTimeout(() => {
+    availableLift.children[0].classList.remove("leftDoorAnimate");
+    availableLift.children[1].classList.remove("rightDoorAnimate");
+  }, 3000);
 }
 
