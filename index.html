@@ -8,24 +8,22 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="lift-form">
-        <label for="number-of-floor">Enter number of floor</label>
-        <input type="number" id="number-of-floors" min="0">
-        <label for="number-of-lifts">Enter number of Lifts</label>
-        <input type="number" id="number-of-lifts" min="0">
-        <div class="submit-button">
-            <button> Submit</button>
+<h1 class="heading">Lift Simulator</h1>
+        <div id="lift-form-container">
+            <div>
+                <label id="number-io" for="number-of-floors">Enter number of floor</label>
+                <input type="number" id="number-of-floors" min="0">
+            </div>
+            <div>
+                <label for="number-of-lifts">Enter number of Lifts</label>
+                <input type="number" id="number-of-lifts" min="0">
+            </div>
+
+            <div class="submit-button">
+                <button> Submit</button>
+            </div>
         </div>
-
-    </div>
-
-    <div class="lift-container">
-
-        <div id="floors-container">
-            <!-- floors and lifts will come here -->
-        </div>
-       
-    </div>
+        <div class="final-page"></div>
     <script src="./js/main.js"></script>
     
 </body>
