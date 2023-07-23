@@ -1,49 +1,126 @@
-.lift-form
-{
-   width: 30%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap:0.5rem
+* {
+    margin: 0;
+    padding: 0;
+    border: border-box;
 }
-.lift-container
-{
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-}
-.floor
-{
-    display: flex;
-    
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-   
-    border-bottom: 3px solid blueviolet;
-}
-.Lift
-{
-    height:4rem;
-    width: 2rem;
-    margin-right:1rem;
-    margin-left: 1rem;
-    border: 1px solid black;
-    
-    background-color: blueviolet;
-}
-.lifts
-{
-    display: flex;
-    
-}
-.floor-lifts
-{
 
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+    /* background: linear-gradient(rgba(80, 79, 79, 0.5), rgba(80, 79, 79, 0.5)), url('../assets/back.avif'); */
+}
+
+.heading {
+    color: black;
+    font-size: 60px;
+    width: 100%;
+    margin-top: 20px;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.InputForm {
+    padding: 20px;
+    width: 100%;
+    margin-top: 20px;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    color: rgb(27, 23, 17);
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.InputForm>div {
+    margin: 20px 0;
+}
+
+#Submit {
+    color: black;
+    padding: 5px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.Floor {
     display: flex;
     align-items: center;
+}
+
+.FloorBoundaryLines {
+    background-color: rgb(22, 22, 22);
+    margin: 0 10px 0 10px;
+    height: 4px;
+    width: 90%;
+}
+
+.FloorWrapperContainer {
+    margin: 1rem auto;
+    position: relative;
+    padding: 0.6rem;
+}
+
+.FloorWrapper {
+    display: flex;
+    width: 70%;
+    margin: 5px;
+}
+
+.FloorNumberWrapper {
+    color: black;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.up-button,
+.down-button {
+    font-weight: bold;
+    padding: 1px;
+    margin: 10px auto;
+    width: 60px;
+    display: block;
     justify-content: center;
+
+    cursor: pointer;
+}
+
+.LiftWrapper {
+    max-width: 94%;
+    height: 120px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.Lift {
+    height: 120px;
+    width: 4.8rem;
+    border: 2px solid rgb(24, 23, 23);
+    margin-left: 35px;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.left-door,
+.right-door {
+    height: 116px;
+    width: 2.4rem;
+    border: 1px solid black;
+    /* background-color: rgb(128, 120, 113); */
+    background-color: #0284c7;
+    padding: 1px;
+    transition-duration: 2.5s;
+}
+
+.leftDoorAnimate {
+    transform: translate(-100%);
+    transition-duration: 2.5s;
+}
+
+.rightDoorAnimate {
+    transform: translate(100%);
+    transition-duration: 2.5s;
 }
