@@ -9,6 +9,20 @@ body {
     overflow-x: hidden;
     /* background: linear-gradient(rgba(80, 79, 79, 0.5), rgba(80, 79, 79, 0.5)), url('../assets/back.avif'); */
 }
+#lift-form-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:2rem;
+    margin-top: 2rem;
+}
+.error-message
+
+{
+    color:red;
+}
 
 .heading {
     color: black;
@@ -20,7 +34,7 @@ body {
     text-align: center;
 }
 
-.InputForm {
+/* .InputForm {
     padding: 20px;
     width: 100%;
     margin-top: 20px;
@@ -34,9 +48,9 @@ body {
 
 .InputForm>div {
     margin: 20px 0;
-}
+} */
 
-#Submit {
+.submit-button {
     color: black;
     padding: 5px;
     font-weight: bolder;
@@ -48,44 +62,43 @@ body {
     align-items: center;
 }
 
-.FloorBoundaryLines {
+.floor-boundary-lines {
     background-color: rgb(22, 22, 22);
     margin: 0 10px 0 10px;
-    height: 4px;
+    height: 2px;
     width: 90%;
 }
 
-.FloorWrapperContainer {
+.floor-wrapper-container {
     margin: 1rem auto;
     position: relative;
     padding: 0.6rem;
 }
 
-.FloorWrapper {
+.floor-wrapper {
     display: flex;
     width: 70%;
     margin: 5px;
 }
 
-.FloorNumberWrapper {
+.floor-number-wrapper {
     color: black;
     font-size: 30px;
-    font-weight: bolder;
+    font-weight: bold;
 }
 
 .up-button,
 .down-button {
-    font-weight: bold;
+    /* font-weight: bold; */
     padding: 1px;
     margin: 10px auto;
     width: 60px;
     display: block;
     justify-content: center;
-
     cursor: pointer;
 }
 
-.LiftWrapper {
+.lift-wrapper {
     max-width: 94%;
     height: 120px;
     display: flex;
