@@ -2,6 +2,7 @@
 // var numberOfFloors = document.querySelector("#number-of-floors");
 const submitButton = document.querySelector(".submit-button");
 const FinalPage = document.querySelector(".final-page");
+const errorMessage = document.querySelector("#error-message");
 
 let liftRequestQueue = [];
 
@@ -29,7 +30,12 @@ function clickHandler() {
     liftCount <= 0 ||
     liftCount > 10
   ) {
-    alert("enter valid input");
+    errorMessage.innerText ="enter valid input";
+    return;
+  }
+  else if(liftCount > floorCount)
+  {
+    errorMessage.innerText = "number of floors should be greater then number of lifts";
     return;
   }
 
@@ -101,20 +107,20 @@ function CreateFloors(totalFloors) {
   let floors = totalFloors;
   let resultantDisplay = ``;
   if (floors === 1) {
-    resultantDisplay += `<div class='FloorWrapperContainer'>
-            <div class="FloorWrapper"></div>
+    resultantDisplay += `<div class='floor-wrapper-container'>
+            <div class="floor-wrapper"></div>
             <div class="Floor">
-                <div class="FloorBoundaryLines"></div>
-                <div class="FloorNumberWrapper">
-                     Floor <span class="FloorNumber"> 0 </span>
+                <div class="floor-boundary-lines"></div>
+                <div class="floor-number-wrapper">
+                     Floor <span class="floor-number"> 0 </span>
                 </div>
             </div>
         </div>`;
   } else {
     for (let i = floors - 1; i >= 0; i--) {
-      resultantDisplay += `<div class='FloorWrapperContainer'>
-            <div class="FloorWrapper">
-                <div class="LiftButtons">
+      resultantDisplay += `<div class='floor-wrapper-container'>
+            <div class="floor-wrapper">
+                <div class="lift-buttons">
                     ${
                       i === floors - 1
                         ? ""
@@ -126,14 +132,14 @@ function CreateFloors(totalFloors) {
                         : `<button class="down-button" data-floorNo="${i}">DOWN</button>`
                     }
                 </div>
-                <div class="LiftWrapper">
+                <div class="lift-wrapper">
                     ${i === 0 ? CreateLifts() : ""}
                 </div>
             </div>
             <div class="Floor">
-                <div class="FloorBoundaryLines"></div>
-                <div class="FloorNumberWrapper">
-                    Floor <span class="FloorNumber"> ${i}</span>
+                <div class="floor-boundary-lines"></div>
+                <div class="floor-number-wrapper">
+                    Floor <span class="floor-number"> ${i}</span>
                 </div>
             </div>
         </div>`;
@@ -187,7 +193,7 @@ function moveLift(targetFloor) {
   //Make the status of lift free after certain time
   setTimeout(() => {
     DoorAnimation(availableLift);
-  }, distanceToTravel * 2000 + 5000);
+  }, distanceToTravel * 2000);
 
   setTimeout(() => {
     availableLift.setAttribute("data-status", "free");
@@ -211,15 +217,15 @@ function checkAvailability() {
 
 //Check for any requests in the queue and process it
 function checkQueue() {
-  console.log("cheeck queue");
+  // console.log("cheeck queue");
   if (liftRequestQueue.length === 0) {
     return;
   } else {
     let target = liftRequestQueue[0];
-    console.log("target", target);
+    // console.log("target", target);
     if (checkAvailability()) {
       liftRequestQueue.shift();
-      console.log("inside checkAvailability if statement");
+      // console.log("inside checkAvailability if statement");
 
       moveLift(target);
     } else {
