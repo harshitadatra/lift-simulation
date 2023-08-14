@@ -17,8 +17,9 @@ function clickHandler() {
   const numberOfLifts = document.querySelector("#number-of-lifts");
   const numberOfFloors = document.querySelector("#number-of-floors");
 
-  const floorCount = numberOfFloors.value;
-  const liftCount = numberOfLifts.value;
+  const floorCount = Number(numberOfFloors.value);
+  const liftCount = Number(numberOfLifts.value);
+  //console.log("type of --->",typeof floorCount)
 
   // console.log(numberOfFloors.value)
   // console.log(numberOfLifts.value);
@@ -41,9 +42,9 @@ function clickHandler() {
 
   // CreateFloors(floorCount);
   // CreateLifts(liftCount);
-  document.getElementById("lift-form-container").style.display = "none";
+    document.getElementById("lift-form-container").style.display = "none";
   FinalPage.innerHTML = CreateFloors(floorCount);
-}
+  }
 
 addEventListener("click", (e) => {
   if (
