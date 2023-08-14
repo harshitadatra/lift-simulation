@@ -43,7 +43,21 @@ function clickHandler() {
   // CreateFloors(floorCount);
   // CreateLifts(liftCount);
     document.getElementById("lift-form-container").style.display = "none";
+    var backBtn = document.createElement("button");
+    backBtn.innerText = "back"
+    backBtn.className="back-button";
+    
+    
   FinalPage.innerHTML = CreateFloors(floorCount);
+  FinalPage.appendChild(backBtn);
+  backBtn.onclick = function () {
+    FinalPage.style.display="none";
+    document.getElementById("lift-form-container").style.display = "block"
+    
+
+    
+  };
+
   }
 
 addEventListener("click", (e) => {
